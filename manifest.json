@@ -3,7 +3,7 @@
   "id": "com.haas.solitaire",
   "name": "Solitaire",
   "description": "A calm, tactile game of draw-one Klondike solitaire.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "runtimeProfiles": [
     {
       "key": "dev",
@@ -39,7 +39,7 @@
           "type": "docker",
           "image": {
             "repository": "hosty-solitaire",
-            "tag": "0.1.0"
+            "tag": "0.2.0"
           },
           "ports": [
             {

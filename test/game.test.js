@@ -180,3 +180,12 @@ test("persistence restores valid games and rejects incompatible data", () => {
   assert.equal(deserializeGame("not json"), null);
   assert.equal(deserializeGame({ schemaVersion: 2, state: game }), null);
 });
+
+test("validation rejects malformed tableau piles without throwing", () => {
+  const malformed = createGame(81);
+  malformed.tableau[3] = null;
+
+  assert.doesNotThrow(() => validateGame(malformed));
+  assert.equal(validateGame(malformed), false);
+  assert.equal(deserializeGame(JSON.stringify({ schemaVersion: 1, state: malformed, history: [] })), null);
+});

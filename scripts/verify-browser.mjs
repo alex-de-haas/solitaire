@@ -82,6 +82,16 @@ assert.equal(state.seed, 42);
 assert.equal(state.stock.count, 23);
 assert.equal(state.moves, 1);
 
+await desktop.goto(`${baseUrl}/?seed=not-a-number&motion=none`, { waitUntil: "networkidle" });
+state = await readState(desktop);
+assert.equal(state.seed, 42);
+assert.equal(state.stock.count, 23);
+
+await desktop.goto(`${baseUrl}/?scenario=unknown&motion=none`, { waitUntil: "networkidle" });
+state = await readState(desktop);
+assert.equal(state.seed, 42);
+assert.equal(state.stock.count, 23);
+
 await desktop.click('[data-action="hint"]');
 state = await readState(desktop);
 assert.ok(state.hint);

@@ -146,4 +146,4 @@ The game remains playable when Hosty identity is unavailable. An authenticated p
 
 ## Notes
 
-The app version remains unchanged until a Pull Request is prepared for merge, in accordance with repository versioning rules.
+The initial application PR was prepared for merge at version `0.2.0`. A later leaderboard implementation PR must evaluate its own single version increment independently.

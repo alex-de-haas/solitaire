@@ -15,4 +15,4 @@ COPY scripts/server.mjs ./scripts/server.mjs
 COPY --from=build /app/dist ./dist
 EXPOSE 3000
 USER node
-CMD ["npm", "start"]
+CMD ["node", "scripts/server.mjs", "dist"]

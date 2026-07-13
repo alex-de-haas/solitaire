@@ -41,9 +41,11 @@ const actionButtons = Object.fromEntries([...document.querySelectorAll("[data-ac
 
 const params = new URLSearchParams(location.search);
 const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches || params.get("motion") === "none";
-const forcedSeed = params.has("seed") ? Number(params.get("seed")) : null;
-const scenario = params.get("scenario");
-const skipSavedGame = params.get("fresh") === "1" || forcedSeed !== null || scenario;
+const seedParam = params.get("seed");
+const parsedSeed = seedParam?.trim() ? Number(seedParam) : Number.NaN;
+const forcedSeed = Number.isFinite(parsedSeed) ? parsedSeed : null;
+const scenario = params.get("scenario") === "won" ? "won" : null;
+const skipSavedGame = params.get("fresh") === "1" || forcedSeed !== null || scenario === "won";
 
 let stats = loadStats();
 const restoredGame = skipSavedGame ? null : loadGame();
@@ -131,13 +133,17 @@ function setMessage(message) {
 }
 
 function updateChrome() {
-  movesElement.textContent = String(game.moves);
-  timeElement.textContent = formatTime(game.elapsedMs);
-  winsElement.textContent = String(stats.wins);
-  statusElement.textContent = game.status === "won" ? `Table cleared in ${game.moves} moves · ${formatTime(game.elapsedMs)}` : ui.message;
-  actionButtons.undo.disabled = game.history.length === 0;
-  actionButtons.hint.disabled = game.status === "won";
-  actionButtons.auto.disabled = game.status === "won";
+  const moves = String(game.moves);
+  const time = formatTime(game.elapsedMs);
+  const wins = String(stats.wins);
+  const status = game.status === "won" ? `Table cleared in ${game.moves} moves · ${time}` : ui.message;
+  if (movesElement.textContent !== moves) movesElement.textContent = moves;
+  if (timeElement.textContent !== time) timeElement.textContent = time;
+  if (winsElement.textContent !== wins) winsElement.textContent = wins;
+  if (statusElement.textContent !== status) statusElement.textContent = status;
+  if (actionButtons.undo.disabled !== (game.history.length === 0)) actionButtons.undo.disabled = game.history.length === 0;
+  if (actionButtons.hint.disabled !== (game.status === "won")) actionButtons.hint.disabled = game.status === "won";
+  if (actionButtons.auto.disabled !== (game.status === "won")) actionButtons.auto.disabled = game.status === "won";
 }
 
 function resizeCanvas() {
@@ -223,15 +229,15 @@ function drawFelt(layout) {
   context.save();
   context.strokeStyle = "rgba(255, 253, 245, 0.035)";
   context.lineWidth = 1;
+  context.beginPath();
   for (let y = 7; y < layout.height; y += 18) {
     const offset = (Math.floor(y / 18) % 2) * 9;
     for (let x = offset; x < layout.width; x += 24) {
-      context.beginPath();
       context.moveTo(x, y);
       context.lineTo(x + 4, y + 1.5);
-      context.stroke();
     }
   }
+  context.stroke();
   context.restore();
 }
 
@@ -700,7 +706,6 @@ canvas.addEventListener("pointermove", (event) => {
   if (ui.drag) {
     ui.drag.x = point.x;
     ui.drag.y = point.y;
-    render();
   }
 });
 
@@ -772,13 +777,21 @@ function update(deltaMs) {
 }
 
 let previousFrame = performance.now();
+let lastChromeSecond = -1;
 function frame(timestamp) {
-  const wasAnimating = ui.dealMs < DEAL_DURATION || ui.hintMs > 0 || (game.status === "won" && !reducedMotion);
+  const wasAnimating = ui.dealMs < DEAL_DURATION || ui.hintMs > 0 || ui.drag || (game.status === "won" && !reducedMotion);
   update(timestamp - previousFrame);
   previousFrame = timestamp;
-  const isAnimating = ui.dealMs < DEAL_DURATION || ui.hintMs > 0 || (game.status === "won" && !reducedMotion);
-  if (wasAnimating || isAnimating) render();
-  else updateChrome();
+  const isAnimating = ui.dealMs < DEAL_DURATION || ui.hintMs > 0 || ui.drag || (game.status === "won" && !reducedMotion);
+  if (wasAnimating || isAnimating) {
+    render();
+  } else {
+    const currentSecond = Math.floor(game.elapsedMs / 1000);
+    if (currentSecond !== lastChromeSecond) {
+      lastChromeSecond = currentSecond;
+      updateChrome();
+    }
+  }
   requestAnimationFrame(frame);
 }
 

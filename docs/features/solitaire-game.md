@@ -48,7 +48,7 @@ Persistence is local to the browser profile. Cross-device synchronization and se
 The `app.0.1` manifest defines one `web` service and one public HTTP endpoint used by the Shell entrypoint.
 
 - The default `dev` profile is a source-backed `localCommand` runtime. Hosty runs the production build setup, injects a dynamic port, and starts the Node static server on loopback.
-- The `docker` profile runs the local `hosty-solitaire:0.1.0` image, listens on container port 3000, and includes an executable HTTP health check.
+- The `docker` profile runs the local `hosty-solitaire:0.2.0` image, listens on container port 3000, and includes an executable HTTP health check.
 
 The app does not request Hosty identity, app data, settings, external mounts, telemetry, or privileged capabilities. It reads `PORT`, `HOSTY_PORT_HTTP`, and `HOSTY_APP_ID` when provided.
 

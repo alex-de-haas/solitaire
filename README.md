@@ -34,7 +34,7 @@ hosty apps start com.haas.solitaire
 For the Docker profile, build the manifest-declared local image first:
 
 ```bash
-docker build -t hosty-solitaire:0.1.0 .
+docker build -t hosty-solitaire:0.2.0 .
 hosty apps install . --runtime docker
 hosty apps start com.haas.solitaire
 ```

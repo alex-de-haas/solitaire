@@ -390,7 +390,7 @@ function validateCard(card) {
 }
 
 export function validateGame(state) {
-  if (!state || state.schemaVersion !== GAME_SCHEMA_VERSION || !Array.isArray(state.stock) || !Array.isArray(state.waste) || !Array.isArray(state.tableau) || state.tableau.length !== 7) return false;
+  if (!state || state.schemaVersion !== GAME_SCHEMA_VERSION || !Array.isArray(state.stock) || !Array.isArray(state.waste) || !Array.isArray(state.tableau) || state.tableau.length !== 7 || !state.tableau.every(Array.isArray)) return false;
   if (!state.foundations || !SUITS.every((suit) => Array.isArray(state.foundations[suit.key]))) return false;
   if (!Number.isInteger(state.moves) || state.moves < 0 || !Number.isInteger(state.redeals) || state.redeals < 0 || !Number.isFinite(state.elapsedMs) || state.elapsedMs < 0) return false;
   if (state.status !== "playing" && state.status !== "won") return false;
