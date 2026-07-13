@@ -1,0 +1,99 @@
+{
+  "schemaVersion": "app.0.1",
+  "id": "com.haas.solitaire",
+  "name": "Solitaire",
+  "description": "A calm, tactile game of draw-one Klondike solitaire.",
+  "version": "0.2.0",
+  "runtimeProfiles": [
+    {
+      "key": "dev",
+      "type": "localCommand",
+      "default": true,
+      "development": true
+    },
+    {
+      "key": "docker",
+      "type": "docker"
+    }
+  ],
+  "defaultRuntime": "dev",
+  "services": [
+    {
+      "key": "web",
+      "runtimes": {
+        "dev": {
+          "type": "localCommand",
+          "workingDirectory": ".",
+          "setup": "npm run build",
+          "command": "npm start",
+          "ports": [
+            {
+              "key": "http",
+              "containerPort": 3000,
+              "protocol": "http",
+              "public": true
+            }
+          ]
+        },
+        "docker": {
+          "type": "docker",
+          "image": {
+            "repository": "hosty-solitaire",
+            "tag": "0.2.0"
+          },
+          "ports": [
+            {
+              "key": "http",
+              "containerPort": 3000,
+              "protocol": "http",
+              "public": true
+            }
+          ],
+          "healthcheck": {
+            "type": "exec",
+            "command": "node -e \"fetch('http://127.0.0.1:3000/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))\"",
+            "intervalSeconds": 30,
+            "timeoutSeconds": 5,
+            "retries": 3,
+            "gracePeriodSeconds": 5
+          }
+        }
+      }
+    }
+  ],
+  "endpoints": [
+    {
+      "key": "http",
+      "service": "web",
+      "port": "http",
+      "protocol": "http",
+      "public": true
+    }
+  ],
+  "ui": {
+    "category": "Games",
+    "icon": "spade",
+    "entrypoint": {
+      "endpoint": "http",
+      "path": "/"
+    },
+    "navigation": [
+      {
+        "label": "Play",
+        "path": "/",
+        "endpoint": "http",
+        "iconAsset": "public/icon.svg"
+      }
+    ]
+  },
+  "capabilities": ["open", "update", "restart", "stop", "remove", "logs"],
+  "catalogMetadata": {
+    "publisher": {
+      "name": "Haas"
+    },
+    "category": "Games",
+    "tags": ["cards", "klondike", "offline"],
+    "icon": "public/icon.svg",
+    "summary": "A focused draw-one Klondike game designed for Hosty Shell."
+  }
+}
