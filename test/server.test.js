@@ -1,6 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { once } from "node:events";
+import { readFileSync } from "node:fs";
 import { createConnection } from "node:net";
 import { resolve } from "node:path";
 
@@ -31,6 +32,7 @@ async function rawRequest(port, request) {
 }
 
 test("the server ignores malformed Host values when parsing request paths", async () => {
+  const packageVersion = JSON.parse(readFileSync(resolve("package.json"), "utf8")).version;
   const server = createSolitaireServer({ root: resolve("public"), appId: "com.haas.solitaire.test" });
   const port = await listen(server);
 
@@ -38,6 +40,7 @@ test("the server ignores malformed Host values when parsing request paths", asyn
     const response = await rawRequest(port, "GET /health HTTP/1.1\r\nHost: [\r\nConnection: close\r\n\r\n");
     assert.match(response, /^HTTP\/1\.1 200 OK/m);
     assert.match(response, /"appId":"com\.haas\.solitaire\.test"/);
+    assert.ok(response.includes(`"version":"${packageVersion}"`));
   } finally {
     await close(server);
   }
