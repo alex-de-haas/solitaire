@@ -1,0 +1,20 @@
+{
+  "name": "hosty-solitaire",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "A tactile Klondike solitaire game for Hosty.",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "dev": "node scripts/server.mjs public",
+    "start": "node scripts/server.mjs dist",
+    "test": "node --test",
+    "test:browser": "node scripts/verify-browser.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "devDependencies": {
+    "playwright": "^1.61.1"
+  }
+}

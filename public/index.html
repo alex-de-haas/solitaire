@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#176b52" />
+    <meta name="description" content="A tactile game of draw-one Klondike solitaire for Hosty." />
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/styles.css" />
+    <title>Solitaire</title>
+  </head>
+  <body>
+    <main class="app" id="app">
+      <header class="command-rail">
+        <div class="brand" aria-label="Solitaire">
+          <span class="brand-mark" aria-hidden="true">♠</span>
+          <div>
+            <p class="eyebrow">Hosty table · draw one</p>
+            <h1>Solitaire</h1>
+          </div>
+        </div>
+
+        <dl class="counters" aria-label="Game statistics">
+          <div>
+            <dt>Moves</dt>
+            <dd id="moves">0</dd>
+          </div>
+          <div>
+            <dt>Time</dt>
+            <dd id="time">00:00</dd>
+          </div>
+          <div class="wins-counter">
+            <dt>Wins</dt>
+            <dd id="wins">0</dd>
+          </div>
+        </dl>
+
+        <nav class="actions" aria-label="Game actions">
+          <button type="button" data-action="new" title="New deal (N)"><span aria-hidden="true">↻</span><span>New deal</span></button>
+          <button type="button" data-action="undo" title="Undo (Z)"><span aria-hidden="true">↶</span><span>Undo</span></button>
+          <button type="button" data-action="hint" title="Hint (H)"><span aria-hidden="true">✦</span><span>Hint</span></button>
+          <button type="button" data-action="auto" title="Move safe cards to foundations (A)"><span aria-hidden="true">⇡</span><span>Auto</span></button>
+          <button class="icon-button" type="button" data-action="fullscreen" title="Toggle fullscreen (F)" aria-label="Toggle fullscreen"><span aria-hidden="true">⛶</span></button>
+        </nav>
+      </header>
+
+      <section class="board-shell" id="board-shell" aria-label="Solitaire table">
+        <canvas id="game-canvas" tabindex="0" aria-label="Klondike solitaire board. Use pointer controls or keyboard shortcuts shown below."></canvas>
+      </section>
+
+      <footer class="status-rail">
+        <p class="status" id="status" aria-live="polite">Deal the cards.</p>
+        <p class="shortcuts" aria-label="Keyboard shortcuts"><kbd>N</kbd> new <kbd>Z</kbd> undo <kbd>H</kbd> hint <kbd>A</kbd> auto <kbd>F</kbd> fullscreen</p>
+      </footer>
+    </main>
+
+    <script type="module" src="/app.js?build=20260713.1"></script>
+  </body>
+</html>
