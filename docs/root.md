@@ -12,3 +12,7 @@
 ## Features
 
 - [Solitaire Game](features/solitaire-game.md)
+
+## Marketplace
+
+- [Solitaire Store Description](store.md)

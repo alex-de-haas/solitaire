@@ -39,7 +39,7 @@ export function createSolitaireServer({ root = defaultRoot, appId = defaultAppId
     }
 
     if (url.pathname === "/health") {
-      sendJson(response, 200, { status: "ok", appId, version: "0.2.0" });
+      sendJson(response, 200, { status: "ok", appId, version: "0.3.0" });
       return;
     }
 

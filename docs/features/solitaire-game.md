@@ -47,10 +47,16 @@ Persistence is local to the browser profile. Cross-device synchronization and se
 
 The `app.0.1` manifest defines one `web` service and one public HTTP endpoint used by the Shell entrypoint.
 
-- The default `dev` profile is a source-backed `localCommand` runtime. Hosty runs the production build setup, injects a dynamic port, and starts the Node static server on loopback.
-- The `docker` profile runs the local `hosty-solitaire:0.2.0` image, listens on container port 3000, and includes an executable HTTP health check.
+- The default `docker` profile runs the published `ghcr.io/alex-de-haas/solitaire:latest` image, listens on container port 3000, and includes an executable HTTP health check. Hosty pins the selected image digest during reviewed installs and updates.
+- The `dev` profile is a source-backed `localCommand` runtime. Local directory installs use the current worktree; remote installs can clone the manifest-declared Git source. Hosty runs the production build setup, injects a dynamic port, and starts the Node static server on loopback.
 
 The app does not request Hosty identity, app data, settings, external mounts, telemetry, or privileged capabilities. It reads `PORT`, `HOSTY_PORT_HTTP`, and `HOSTY_APP_ID` when provided.
+
+## Marketplace Distribution
+
+The repository publishes one `main` feed in `feeds.json`. It follows the raw `manifest.json` on the repository's `main` branch, allowing Hosty Core to re-resolve reviewed updates without changing the catalog entry.
+
+The manifest provides the Marketplace publisher, category, tags, MIT license, icon, links, summary, and the long description in `docs/store.md`. The official Hosty catalog references the repository-owned feed and presents the app in the `Games` category.
 
 ## Automation Interface
 

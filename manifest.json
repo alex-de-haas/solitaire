@@ -3,20 +3,25 @@
   "id": "com.haas.solitaire",
   "name": "Solitaire",
   "description": "A calm, tactile game of draw-one Klondike solitaire.",
-  "version": "0.2.0",
+  "version": "0.3.0",
+  "source": {
+    "type": "git",
+    "repository": "https://github.com/alex-de-haas/solitaire.git",
+    "branch": "main"
+  },
   "runtimeProfiles": [
+    {
+      "key": "docker",
+      "type": "docker",
+      "default": true
+    },
     {
       "key": "dev",
       "type": "localCommand",
-      "default": true,
       "development": true
-    },
-    {
-      "key": "docker",
-      "type": "docker"
     }
   ],
-  "defaultRuntime": "dev",
+  "defaultRuntime": "docker",
   "services": [
     {
       "key": "web",
@@ -38,8 +43,8 @@
         "docker": {
           "type": "docker",
           "image": {
-            "repository": "hosty-solitaire",
-            "tag": "0.2.0"
+            "repository": "ghcr.io/alex-de-haas/solitaire",
+            "tag": "latest"
           },
           "ports": [
             {
@@ -89,11 +94,19 @@
   "capabilities": ["open", "update", "restart", "stop", "remove", "logs"],
   "catalogMetadata": {
     "publisher": {
-      "name": "Haas"
+      "name": "Haas",
+      "url": "https://github.com/alex-de-haas",
+      "email": "a.zayats@outlook.com"
     },
     "category": "Games",
     "tags": ["cards", "klondike", "offline"],
     "icon": "public/icon.svg",
-    "summary": "A focused draw-one Klondike game designed for Hosty Shell."
+    "license": "MIT",
+    "links": {
+      "website": "https://github.com/alex-de-haas/solitaire",
+      "docs": "https://github.com/alex-de-haas/solitaire/blob/main/docs/root.md"
+    },
+    "summary": "A focused draw-one Klondike game designed for Hosty Shell.",
+    "descriptionFile": "docs/store.md"
   }
 }
