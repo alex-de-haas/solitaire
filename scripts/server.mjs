@@ -1,4 +1,4 @@
-import { createReadStream } from "node:fs";
+import { createReadStream, readFileSync } from "node:fs";
 import { stat } from "node:fs/promises";
 import { extname, resolve, sep } from "node:path";
 import { createServer } from "node:http";
@@ -8,6 +8,7 @@ const defaultRoot = resolve(process.argv[2] || "dist");
 const defaultPort = Number(process.env.PORT || process.env.HOSTY_PORT_HTTP || 4173);
 const defaultHost = process.env.HOST || "127.0.0.1";
 const defaultAppId = process.env.HOSTY_APP_ID || "com.haas.solitaire";
+const defaultVersion = JSON.parse(readFileSync(new URL("../package.json", import.meta.url), "utf8")).version;
 
 const contentTypes = {
   ".css": "text/css; charset=utf-8",
@@ -39,7 +40,7 @@ export function createSolitaireServer({ root = defaultRoot, appId = defaultAppId
     }
 
     if (url.pathname === "/health") {
-      sendJson(response, 200, { status: "ok", appId, version: "0.2.0" });
+      sendJson(response, 200, { status: "ok", appId, version: defaultVersion });
       return;
     }
 

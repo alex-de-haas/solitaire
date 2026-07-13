@@ -1,7 +1,8 @@
 {
   "name": "hosty-solitaire",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
+  "license": "MIT",
   "type": "module",
   "description": "A tactile Klondike solitaire game for Hosty.",
   "scripts": {

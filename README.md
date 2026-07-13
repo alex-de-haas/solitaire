@@ -23,6 +23,15 @@ The server reads `PORT`, then `HOSTY_PORT_HTTP`, and otherwise uses `4173`. It b
 
 ## Hosty
 
+Install the game from Hosty Marketplace, or install its repository-owned feed directly:
+
+```text
+https://raw.githubusercontent.com/alex-de-haas/solitaire/main/feeds.json
+```
+
+Marketplace installations use the published Docker image by default. Hosty resolves the moving
+`latest` tag to an immutable digest during the reviewed install or update flow.
+
 Install and start the source-backed development profile from the repository root:
 
 ```bash
@@ -34,12 +43,17 @@ hosty apps start com.haas.solitaire
 For the Docker profile, build the manifest-declared local image first:
 
 ```bash
-docker build -t hosty-solitaire:0.2.0 .
+docker build -t ghcr.io/alex-de-haas/solitaire:latest .
 hosty apps install . --runtime docker
 hosty apps start com.haas.solitaire
 ```
 
 The manifest exposes one public HTTP endpoint and a Hosty Shell entrypoint. Hosty assigns the host port dynamically.
+
+Pushes to `main` verify the application and publish `linux/amd64` and `linux/arm64` images to GHCR.
+GitHub creates a new personal-account container package as private, so after the first publish set
+the `solitaire` package visibility to [**Public**](https://docs.github.com/en/packages/learn-github-packages/configuring-a-packages-access-control-and-visibility#configuring-visibility-of-packages-for-your-personal-account)
+before enabling its official catalog entry.
 
 ## Verification
 
@@ -63,4 +77,9 @@ The active game and lightweight statistics use versioned browser local-storage e
 ## Documentation
 
 - [Feature behavior](docs/features/solitaire-game.md)
+- [Marketplace description](docs/store.md)
 - [Documentation index](docs/root.md)
+
+## License
+
+MIT. See [LICENSE](LICENSE).
