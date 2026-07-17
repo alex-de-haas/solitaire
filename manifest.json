@@ -3,7 +3,7 @@
   "id": "com.haas.solitaire",
   "name": "Solitaire",
   "description": "A calm, tactile game of draw-one Klondike solitaire.",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "source": {
     "type": "git",
     "repository": "https://github.com/alex-de-haas/solitaire.git",
@@ -91,7 +91,7 @@
       }
     ]
   },
-  "capabilities": ["open", "update", "restart", "stop", "remove", "logs"],
+  "capabilities": ["logs"],
   "catalogMetadata": {
     "publisher": {
       "name": "Haas",
