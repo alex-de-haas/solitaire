@@ -1,8 +1,11 @@
-# Hosty Leaderboard
+---
+status: Draft
+created: 2026-07-13
+updated: 2026-10-05
+summary: A shared leaderboard of personal bests keyed to Hosty user identities and stored in Hosty's app data directory.
+---
 
-Status: Draft
-Created: 2026-07-13
-Updated: 2026-07-13
+# Hosty Leaderboard
 
 ## Goal
 
@@ -35,27 +38,27 @@ The game remains playable when Hosty identity is unavailable. An authenticated p
 
 ## Acceptance Criteria
 
-- [ ] Opening Solitaire through Hosty Shell establishes an app-local session tied to the current Hosty user.
-- [ ] The leaderboard shows rank, player display label, completion time, and move count for up to ten personal bests.
-- [ ] Ranking uses the approved ordering and returns the authenticated player's rank even when outside the top ten.
-- [ ] A user's stored entry changes only when a submitted completion improves their personal best.
-- [ ] The same user and deal id cannot record the same victory more than once.
-- [ ] Automated victory fixtures and restored already-won games do not submit leaderboard results.
-- [ ] Missing or expired identity does not block gameplay and exposes a working Hosty sign-in/recovery action.
-- [ ] Core `403` displays access denied without a redirect loop; Core outage retains the cookie and offers retry.
-- [ ] Leaderboard writes survive app restart and use Hosty's backup-managed app data directory.
-- [ ] Existing pointer, touch, keyboard, undo, stock, persistence, fullscreen, responsive-layout, and victory flows continue to pass.
+- Opening Solitaire through Hosty Shell establishes an app-local session tied to the current Hosty user.
+- The leaderboard shows rank, player display label, completion time, and move count for up to ten personal bests.
+- Ranking uses the approved ordering and returns the authenticated player's rank even when outside the top ten.
+- A user's stored entry changes only when a submitted completion improves their personal best.
+- The same user and deal id cannot record the same victory more than once.
+- Automated victory fixtures and restored already-won games do not submit leaderboard results.
+- Missing or expired identity does not block gameplay and exposes a working Hosty sign-in/recovery action.
+- Core `403` displays access denied without a redirect loop; Core outage retains the cookie and offers retry.
+- Leaderboard writes survive app restart and use Hosty's backup-managed app data directory.
+- Existing pointer, touch, keyboard, undo, stock, persistence, fullscreen, responsive-layout, and victory flows continue to pass.
 
 ## Deliverables
 
-- [ ] Hosty app-session exchange, cookie, revalidation, and recovery implementation.
-- [ ] Persistent leaderboard repository with atomic writes, input validation, ranking, and deal idempotency.
-- [ ] Authenticated leaderboard HTTP API.
-- [ ] Leaderboard score-sheet UI and responsive states.
-- [ ] Victory submission integration and automation-state reporting.
-- [ ] Manifest app-data and backup capability configuration.
-- [ ] Unit, API, browser, and Hosty runtime tests.
-- [ ] Feature documentation reflecting implemented behavior.
+- [ ] D1. Hosty app-session exchange, cookie, revalidation, and recovery implementation.
+- [ ] D2. Persistent leaderboard repository with atomic writes, input validation, ranking, and deal idempotency.
+- [ ] D3. Authenticated leaderboard HTTP API.
+- [ ] D4. Leaderboard score-sheet UI and responsive states.
+- [ ] D5. Victory submission integration and automation-state reporting.
+- [ ] D6. Manifest app-data and backup capability configuration.
+- [ ] D7. Unit, API, browser, and Hosty runtime tests.
+- [ ] D8. Feature documentation reflecting implemented behavior.
 
 ## Technical Design
 
@@ -113,21 +116,21 @@ The game remains playable when Hosty identity is unavailable. An authenticated p
 
 ### Phase 1: Hosty identity and persistence foundation
 
-- [ ] Add app-session exchange/revalidation and recovery contracts.
-- [ ] Add the versioned atomic leaderboard repository and API tests.
-- [ ] Enable Hosty app data and backup/restore capabilities.
+- Add app-session exchange/revalidation and recovery contracts.
+- Add the versioned atomic leaderboard repository and API tests.
+- Enable Hosty app data and backup/restore capabilities.
 
 ### Phase 2: Game and interface integration
 
-- [ ] Add deal identity and idempotent win submission.
-- [ ] Build the responsive score-sheet UI and automation state.
-- [ ] Add authenticated, unauthenticated, error, mobile, and victory browser coverage.
+- Add deal identity and idempotent win submission.
+- Build the responsive score-sheet UI and automation state.
+- Add authenticated, unauthenticated, error, mobile, and victory browser coverage.
 
 ### Phase 3: Validation and documentation
 
-- [ ] Run unit, build, browser, prescribed web-game client, Docker, and Hosty lifecycle checks.
-- [ ] Validate a direct identity probe and persistent leaderboard behavior across restart.
-- [ ] Update feature documentation and apply the Completion Rule.
+- Run unit, build, browser, prescribed web-game client, Docker, and Hosty lifecycle checks.
+- Validate a direct identity probe and persistent leaderboard behavior across restart.
+- Update feature documentation and apply the Completion Rule.
 
 ## Verification
 
@@ -141,8 +144,7 @@ The game remains playable when Hosty identity is unavailable. An authenticated p
 
 ## Links
 
-- [Originating idea](../ideas/hosty-leaderboard.md)
-- [Current Solitaire behavior](../features/solitaire-game.md)
+- [Current Solitaire behavior](../solitaire-game/feature.md)
 
 ## Notes
 

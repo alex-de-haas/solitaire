@@ -76,7 +76,7 @@ The active game and lightweight statistics use versioned browser local-storage e
 
 ## Documentation
 
-- [Feature behavior](docs/features/solitaire-game.md)
+- [Feature behavior](docs/features/solitaire-game/feature.md)
 - [Marketplace description](docs/store.md)
 - [Documentation index](docs/root.md)
 
