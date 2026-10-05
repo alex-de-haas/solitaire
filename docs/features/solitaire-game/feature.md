@@ -1,7 +1,10 @@
-# Solitaire Game
+---
+created: 2026-07-13
+updated: 2026-10-05
+summary: A responsive draw-one Klondike solitaire game that runs in the browser and stores the current table locally.
+---
 
-Created: 2026-07-13
-Updated: 2026-07-13
+# Solitaire Game
 
 ## Overview
 
@@ -68,5 +71,10 @@ Draw-three games, limited redeals, scoring variants, daily challenges, leaderboa
 
 ## Links
 
-- [Originating idea](../ideas/solitaire-game.md)
-- Planning: `docs/planning/solitaire-game.md` (completed and removed according to the Completion Rule)
+- [Hosty leaderboard plan](../hosty-leaderboard/plan.md)
+
+## Testing Expectations
+
+- `npm test` runs the game rules (`test/game.test.js`) and the static server (`test/server.test.js`).
+- `npm run test:browser` drives the built game in a headless browser and fails on page or console
+  errors.
