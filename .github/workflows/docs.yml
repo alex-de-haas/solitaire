@@ -16,6 +16,8 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
 
       - name: Set up Node.js
         uses: actions/setup-node@v5
@@ -25,4 +27,6 @@ jobs:
       # Validates frontmatter, deliverable IDs, relative links and the generated index
       # (scripts/docs-index.mjs, the byte-identical copy of docker-host's validator).
       - name: Check docs index and frontmatter
+        env:
+          DOCS_BASE_REF: ${{ github.event.pull_request.base.sha || github.event.before }}
         run: node scripts/docs-index.mjs --check
