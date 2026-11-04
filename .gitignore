@@ -5,3 +5,8 @@ test-results/
 output/
 *.log
 progress.md
+
+# Ready-release build outputs and pinned consumer validator
+/release-plan/
+/release-artifacts/
+/.hosty-validator/

@@ -1,11 +1,12 @@
-FROM node:24-alpine AS build
+ARG NODE_IMAGE=node:24-alpine
+FROM ${NODE_IMAGE} AS build
 WORKDIR /app
 COPY package.json ./
-COPY scripts ./scripts
+COPY scripts/build.mjs ./scripts/build.mjs
 COPY public ./public
 RUN npm run build
 
-FROM node:24-alpine
+FROM ${NODE_IMAGE}
 WORKDIR /app
 ENV NODE_ENV=production \
     HOST=0.0.0.0 \
