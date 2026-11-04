@@ -26,7 +26,7 @@ The server reads `PORT`, then `HOSTY_PORT_HTTP`, and otherwise uses `4173`. It b
 Install the game from Hosty Marketplace, or install its repository-owned feed directly:
 
 ```text
-https://raw.githubusercontent.com/alex-de-haas/solitaire/main/feeds.json
+https://raw.githubusercontent.com/alex-de-haas/solitaire/app-releases/apps/com.haas.solitaire/feeds.json
 ```
 
 Marketplace installations use the published Docker image by default. Hosty resolves the moving
@@ -43,7 +43,7 @@ hosty apps start com.haas.solitaire
 For the Docker profile, build the manifest-declared local image first:
 
 ```bash
-docker build -t ghcr.io/alex-de-haas/solitaire:latest .
+docker build -t ghcr.io/alex-de-haas/solitaire:0.4.0 .
 hosty apps install . --runtime docker
 hosty apps start com.haas.solitaire
 ```
@@ -83,3 +83,5 @@ The active game and lightweight statistics use versioned browser local-storage e
 ## License
 
 MIT. See [LICENSE](LICENSE).
+
+Ready-release publication and migration are documented in [Ready app releases](docs/features/ready-releases/feature.md).
